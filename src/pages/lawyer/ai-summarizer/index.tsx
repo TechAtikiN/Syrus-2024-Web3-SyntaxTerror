@@ -3,7 +3,9 @@ import React from 'react'
 
 const AISummarizer = () => {
   return (
-    <Container>AISummarizer</Container>
+    <div className='page-container'>
+      
+    </div>
   )
 }
 
