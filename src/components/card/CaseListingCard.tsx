@@ -26,7 +26,7 @@ const CaseListingCard = ({ caseItem, tokenId }: CaseListingCardProps) => {
       href={`/court/cases/${`${tokenId}-${caseItem?.caseId}`}`}
       className='group border p-3 rounded-lg '
     >
-      <div className='flex flex-col gap-2   '>
+      <div className='flex flex-col gap-2 justify-between h-full  '>
         <div className='relative overflow-hidden h-56 rounded-lg'>
           <Image
             src='https://static.vecteezy.com/system/resources/thumbnails/011/231/538/small/abstract-geometric-background-with-isometric-digital-blocks-blockchain-concept-and-modern-technology-illustration-free-vector.jpg'

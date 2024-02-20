@@ -3,6 +3,7 @@ import Layout from "@/layout/Layout";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { poppins } from "@/utils/font";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -14,9 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
         authUrl: "/api/auth"
       }}
     >
+      <main className={`${poppins.variable} font-poppins`}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      </main>
       </ThirdwebProvider>
     </ThemeProvider>
   );

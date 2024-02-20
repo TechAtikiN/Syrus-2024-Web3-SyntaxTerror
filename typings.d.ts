@@ -43,3 +43,23 @@ type CaseDetails = {
   };
   status: string;
 }
+
+
+type Participant =  {
+  id?: string;
+  email: string;
+  walletAddress: string;
+  meetingId: string;
+}
+
+type Meeting  = {
+  id: string;
+  title: string;
+  description: string;
+  walletAddress: string;
+  status: string;
+  date: string;
+  createdAt: string;
+  updatedAt: string;
+  participants: Participant[];
+}
