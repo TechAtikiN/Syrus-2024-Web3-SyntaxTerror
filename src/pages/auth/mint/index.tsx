@@ -7,12 +7,16 @@ import {
   useUser,
 } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
-import React, { use, useEffect } from "react";
+import React, {  useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const CONTRACT_ADDRESS = "0xDC94e1E6333d3c602a86f08282117d9a871694C2";
 
 const MintPage = () => {
   const { isLoggedIn, isLoading } = useUser();
+  const [option, setOption] = useState("");
   const router = useRouter();
 
   const address = useAddress();
@@ -28,6 +32,32 @@ const MintPage = () => {
     contract,
     address
   );
+
+  const renderOption = (option: string) => {
+    return (
+      <div className="flex flex-col gap-3 items-center justify-center">
+        {option === "lawyer" ? (
+          <Web3Button
+            contractAddress={CONTRACT_ADDRESS}
+            action={(contract) => contract.erc1155.claim(0, 1)}
+            onSuccess={() => router.push("/lawyer")}
+          >
+            Mint Lawyer NFT
+          </Web3Button>
+        ) : option === "court" ? (
+          <Web3Button
+            contractAddress={CONTRACT_ADDRESS}
+            action={(contract) => contract.erc1155.claim(1, 1)}
+            onSuccess={() => router.push("/court")}
+          >
+            Mint Court NFT
+          </Web3Button>
+        ): null}
+      </div>
+    );
+  };
+
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -45,28 +75,24 @@ const MintPage = () => {
   }),
     [isLoggedIn, router, lawyerNFTs, courtNFTs, isLoading];
 
+
   return (
-    <div>
-      <h1>Mint</h1>
-      <ConnectWallet />
-      <Web3Button
-        contractAddress={CONTRACT_ADDRESS}
-        action={(contract) => {
-          contract.erc1155.claim(0, 1);
-        }}
-        // onSuccess={() => router.push("/lawyer")}
-      >
-        Claim Lawyer NFT
-      </Web3Button>
-      <Web3Button
-        contractAddress={CONTRACT_ADDRESS}
-        action={(contract) => {
-          contract.erc1155.claim(1, 1);
-        }}
-        // onSuccess={() => router.push("/court")}
-      >
-        Claim Court NFT
-      </Web3Button>
+    <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
+      <div className="bg-indigo-500 h-full hidden md:block"></div>
+      <div className="flex flex-col gap-3 items-center justify-center">
+
+      <Image src="/logo/logo.png" alt="Nyay Setu" width={300} height={300} />
+      <h3 className="text-xl font-semibold text-primary">
+        To get started, select your role
+      </h3>
+        <div className="flex items-center gap-3">
+          <Button onClick={() => setOption("lawyer")}>Lawyer</Button>
+          <Button onClick={() => setOption("court")}>Court</Button>
+        </div>
+
+      
+        {renderOption(option)}
+      </div>
     </div>
   );
 };

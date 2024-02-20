@@ -4,6 +4,7 @@ import {
   MessageSquareText,
   Users,
   LayoutDashboard,
+  Calendar
 } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 
@@ -32,11 +33,17 @@ const courtRoutes = [
     label: "Cases",
     href: "/court/cases",
   },
+
   {
-    icon: FileText,
-    label: "Create Case",
-    href: "/court/cases/create",
-  }
+    icon: Calendar,
+    label: "Meetings",
+    href: "/court/meetings",
+  },
+  {
+    icon: Users,
+    label: "Settings",
+    href: "/court/settings",
+  },
 ];
 
 
