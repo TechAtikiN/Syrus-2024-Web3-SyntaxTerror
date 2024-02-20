@@ -8,13 +8,12 @@ export default async function handler(
 ) {
   if (request.method === "POST") {
     try {
-      const participantsData = request.body; // Array of participant objects
+      const participantsData = request.body.participants; // Access participants array from the request body
       console.log("participantsData", participantsData);
 
       // Iterate over the array of participants and create each one
       const createdParticipants = await prisma.participant.createMany({
         data: participantsData,
-      
       });
 
      

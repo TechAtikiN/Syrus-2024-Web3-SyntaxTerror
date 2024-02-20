@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import Cookies from "js-cookie";
 
 const LoginPage = () => {
   const showConnectWallet = useShowConnectEmbed();
@@ -38,6 +39,7 @@ const LoginPage = () => {
         lawyerNFTs &&
         lawyerNFTs[0]?.metadata.name === "Token Access"
       ) {
+
         router.push("/lawyer");
       }
       if (
@@ -45,6 +47,7 @@ const LoginPage = () => {
         courtNFTs &&
         courtNFTs[0]?.metadata.name === "Court"
       ) {
+
         router.push("/court");
       }
       if (lawyerNFTs?.length === 0 && courtNFTs?.length === 0) {

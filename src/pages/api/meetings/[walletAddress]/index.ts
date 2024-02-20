@@ -1,20 +1,44 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
+import { NextApiRequest, NextApiResponse } from "next";
 
 interface IParams {
   walletAddress?: string;
 }
 
-export async function GET(request: Request, { params }: { params: IParams }) {
-  const { walletAddress } = params;
-  const meetings = await prisma.meeting.findMany({
-    where: {
-      walletAddress,
-    },
-    include: {
-      participants: true,
-    },
-  });
-  return NextResponse.json(meetings);
+export default async function handler(  request: NextApiRequest,
+  response: NextApiResponse) {
+  if (request.method === "GET") {
+    const { walletAddress } = request.query as IParams;
+
+
+
+    try {
+      const meetings = await prisma.meeting.findMany({
+        where: {
+          participants: {
+            some: {
+              walletAddress,
+            },
+          },
+        },
+        include: {
+          participants: true,
+        },
+      });
+
+
+      response.status(200).json(meetings);
+    } catch (error) {
+      console.error("Error fetching meetings:", error);
+      return NextResponse.error();
+    }
+  } else {
+    response.status(200).json({ message: 'Success' });
+
+  }
+  
 }
+
+
 

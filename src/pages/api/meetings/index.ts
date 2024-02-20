@@ -1,5 +1,5 @@
 import prisma from "@/lib/prismadb";
-import { Participant } from "@prisma/client";
+
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -7,11 +7,11 @@ export default async function handler(
   response: NextApiResponse
 ) {
   if (request.method === "POST") {
+    console.log("request.body", request.body);
     try {
-      const { title, description, walletAddress, date, participants, status } =
+      const { title, description, walletAddress, date, participantIds,  status } =
         request.body;
 
-      // Create a new meeting in the database
       const newMeeting = await prisma.meeting.create({
         // @ts-ignore
         data: {
@@ -20,10 +20,10 @@ export default async function handler(
           walletAddress,
           date,
           status,
-          participants,
-        },
-        include: {
-          participants: true,
+          // @ts-ignore
+          participants: { // Use 'participants' instead of 'participantIds'
+            connect: participantIds.map((id: string) => ({ id })),
+          },
         },
       });
       response.status(200).json(newMeeting);
@@ -38,7 +38,6 @@ export default async function handler(
           participants: true,
         },
       });
-
       response.status(200).json(meetings);
     } catch (error) {
       console.error("Error fetching meetings:", error);

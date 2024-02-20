@@ -126,7 +126,7 @@ const CreateCasePage = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className='p-3 m-4 rounded-md' action=''>
-        <div className='border-b border-slate-300'>
+        <div className='border-b '>
           <h2 className='text-2xl font-semibold'>Create a Case</h2>
           <p className='font-light pb-2  text-xs'>Please fill the required case details</p>
         </div>

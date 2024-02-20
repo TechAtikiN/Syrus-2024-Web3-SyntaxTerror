@@ -10,11 +10,11 @@ interface CaseListingCardProps {
 const getStatusColor = (status: string): string => {
   switch (status) {
     case 'In Progress':
-      return 'text-yellow-700 bg-yellow-500/50 border-yellow-500 dark:text-yellow-200'
+      return 'text-yellow-700 bg-yellow-200 border-yellow-500 dark:text-yellow-800'
     case 'Resolved':
       return 'text-green-800 bg-green-500/50 border-green-500 dark:text-green-200'
     case 'New':
-      return 'bg-purple-300 text-purple-600 dark:text-purple-200  border-purple-500'
+      return 'bg-purple-300 text-purple-600 dark:text-purple-600  border-purple-500'
     default:
       return 'bg-gray-500 '
   }
@@ -26,7 +26,7 @@ const CaseListingCard = ({ caseItem, tokenId }: CaseListingCardProps) => {
       href={`/court/cases/${`${tokenId}-${caseItem?.caseId}`}`}
       className='group border p-3 rounded-lg '
     >
-      <div className='flex flex-col gap-2   '>
+      <div className='flex flex-col gap-2 justify-between h-full  '>
         <div className='relative overflow-hidden h-56 rounded-lg'>
           <Image
             src='https://static.vecteezy.com/system/resources/thumbnails/011/231/538/small/abstract-geometric-background-with-isometric-digital-blocks-blockchain-concept-and-modern-technology-illustration-free-vector.jpg'

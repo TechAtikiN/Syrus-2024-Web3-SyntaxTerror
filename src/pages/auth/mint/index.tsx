@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
+import Cookies from "js-cookie";
 const CONTRACT_ADDRESS = "0xDC94e1E6333d3c602a86f08282117d9a871694C2";
 
 const MintPage = () => {
@@ -62,9 +62,11 @@ const MintPage = () => {
   useEffect(() => {
     if (isLoggedIn) {
       if (lawyerNFTs && lawyerNFTs[0]?.metadata.name === "Token Access") {
+
         router.push("/lawyer");
       }
       if (courtNFTs && courtNFTs[0]?.metadata.name === "Court") {
+
         router.push("/court");
       }
     } else if (lawyerNFTs?.length === 0 && courtNFTs?.length === 0) {

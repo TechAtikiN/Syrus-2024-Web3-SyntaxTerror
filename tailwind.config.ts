@@ -17,6 +17,10 @@ const config = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      manrope: ["var(--font-manrope)"],
+      poppins: ["var(--font-poppins)"],
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
