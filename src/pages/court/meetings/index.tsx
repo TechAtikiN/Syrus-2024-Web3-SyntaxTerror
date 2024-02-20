@@ -1,9 +1,15 @@
 import React from 'react'
+import ZoomMtgEmbedded from '@zoom/meetingsdk/embedded';
 
 const MeetingsPage = () => {
+
+  
   return (
     <div className='page-container'>
         <h3 className='text-2xl font-semibold uppercase'>Meetings</h3>
+        <div className="App">
+  
+    </div>
     </div>
   )
 }
