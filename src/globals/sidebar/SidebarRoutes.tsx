@@ -25,6 +25,11 @@ const lawyerRoutes = [
     label: "AI Judge",
     href: "/lawyer/ai-judge",
   },
+  {
+    icon: MessageSquareText,
+    label: "Scheduled Meetings",
+    href: "/lawyer/meetings",
+  },
 ];
 
 const courtRoutes = [

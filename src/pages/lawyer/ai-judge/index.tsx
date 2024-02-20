@@ -1,5 +1,6 @@
 import ChatArea from "@/components/ai-judge/ChatArea";
 import ChatInput from "@/components/ai-judge/ChatInput";
+import PDFUpload from "@/components/ai-judge/PDFUpload";
 import Image from "next/image";
 import React from "react";
 
@@ -22,8 +23,8 @@ const AIJudge = () => {
         </div>
       </div>
 
-      {/* <PDFUpload /> */}
-      <ChatArea />
+      <PDFUpload />
+      {/* <ChatArea /> */}
       <ChatInput />
     </div>
   );

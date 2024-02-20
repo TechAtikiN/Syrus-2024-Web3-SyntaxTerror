@@ -11,15 +11,22 @@ export default async function handler(  request: NextApiRequest,
   if (request.method === "GET") {
     const { walletAddress } = request.query as IParams;
 
+
+
     try {
       const meetings = await prisma.meeting.findMany({
         where: {
-          walletAddress,
+          participants: {
+            some: {
+              walletAddress,
+            },
+          },
         },
         include: {
           participants: true,
         },
       });
+
 
       response.status(200).json(meetings);
     } catch (error) {

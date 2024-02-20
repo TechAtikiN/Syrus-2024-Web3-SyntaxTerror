@@ -4,7 +4,7 @@ import React from 'react'
 const AISummarizer = () => {
   return (
     <div className='page-container'>
-      
+        
     </div>
   )
 }

@@ -3,15 +3,23 @@ import MeetingCard from "@/components/card/MeetingCard";
 import React from "react";
 import axios from "axios";
 import { useAddress } from "@thirdweb-dev/react";
+import DashboardLoader from "@/components/loader/DashboardLoader";
 
 export function MeetingsPage() {
-    const address = useAddress();
-    const [meetings, setMeetings] = React.useState([]);
-    React.useEffect(() => {
-        axios.get(`http://localhost:3000/api/meetings/${address}`).then((res) => {
-            setMeetings(res.data);
-        });
-    }, []);
+  const address = useAddress();
+
+  const [meetings, setMeetings] = React.useState([]);
+
+  const [loading, setLoading] = React.useState(false);
+  React.useEffect(() => {
+    setLoading(true);
+    axios.get(`http://localhost:3000/api/meetings/${address}`).then((res) => {
+      setMeetings(res.data);
+        setLoading(false);
+    });
+  }, [address]);
+
+  if (address === undefined) return <DashboardLoader />;
 
 
   return (
@@ -27,9 +35,12 @@ export function MeetingsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {meetings?.map((meeting: any) => (
-          <MeetingCard key={meeting.id} meeting={meeting} />
-        ))}
+        {meetings.length > 0 && (
+          meetings?.map((meeting: any) => (
+            <MeetingCard key={meeting.id} meeting={meeting} />
+          )) 
+        ) 
+        }
       </div>
     </div>
   );
