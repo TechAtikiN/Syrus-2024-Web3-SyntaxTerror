@@ -19,6 +19,7 @@
     "@thirdweb-dev/react": "^4.4.8",
     "@thirdweb-dev/sdk": "^4.0.35",
     "@uploadthing/react": "^6.2.4",
+    "@vonage/client-sdk": "^1.5.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "ethers": "^5.7.2",

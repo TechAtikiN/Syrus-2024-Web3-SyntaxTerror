@@ -1,6 +1,7 @@
-import React from "react";
+import React, { use } from "react";
 import DashboardLoader from "../loader/DashboardLoader";
 import CaseListingCard from "../card/CaseListingCard";
+import { useAddress, useContract, useNFTs, useOwnedNFTs } from "@thirdweb-dev/react";
 
 const CaseListing = () => {
   const cases = [
@@ -76,10 +77,19 @@ const CaseListing = () => {
     },
   ];
 
+  const { contract } = useContract(process.env.NEXT_PUBLIC_CASES_CONTRACT_ADDRESS)
+  const { data: caseNfts, isLoading: isCaseNftsLoading, isError } = useNFTs(contract)
+
+    if (isCaseNftsLoading) {
+        return <DashboardLoader />
+    }
+
+
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {cases.map((caseItem, index) => (
-        <CaseListingCard key={index} caseItem={caseItem} />
+      {caseNfts?.map((caseItem, index) => (
+        <CaseListingCard key={index} caseItem={caseItem?.metadata?.properties as TCase } />
       ))}
     </div>
   );
