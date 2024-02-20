@@ -9,14 +9,12 @@ interface CaseListingCardProps {
 
 const getStatusColor = (status: string): string => {
   switch (status) {
-    case 'Pending':
+    case 'In Progress':
       return 'text-yellow-700 bg-yellow-500/50 border-yellow-500 dark:text-yellow-200'
-    case 'Settled':
+    case 'Resolved':
       return 'text-green-800 bg-green-500/50 border-green-500 dark:text-green-200'
     case 'New':
       return 'bg-purple-300 text-purple-600 dark:text-purple-200  border-purple-500'
-    case 'Cancelled':
-      return 'bg-red-500'
     default:
       return 'bg-gray-500 '
   }

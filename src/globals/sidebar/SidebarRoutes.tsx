@@ -33,7 +33,11 @@ const courtRoutes = [
     label: "Cases",
     href: "/court/cases",
   },
-
+  {
+    icon: LayoutDashboard,
+    label: "Create Case",
+    href: "/court/cases/create",
+  },
   {
     icon: Calendar,
     label: "Meetings",

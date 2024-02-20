@@ -24,7 +24,7 @@ const CaseDetailsPage = () => {
       <div className='sm:grid sm:grid-cols-7 gap-x-10 my-5'>
         <div className='col-span-3'>
           <div>
-            <div className='relative h-[330px] w-[480px]'>
+            <div className='relative h-[365px] w-[525px]'>
               <Image src={'/case.png'} alt='Case Image' fill className='object-cover rounded-lg' />
             </div>
             <h4 className='text-xl font-bold text-slate-800 mt-5 my-3'>Case Description:</h4>
