@@ -1,12 +1,12 @@
-import { contractAddress } from "@/util/checkBalance";
+import LoginLoader from "@/components/loader/LoginLoader";
 import {
-  ConnectEmbed,
   useAddress,
   useContract,
-  useContractMetadata,
   useOwnedNFTs,
+  ConnectWallet,
   useShowConnectEmbed,
 } from "@thirdweb-dev/react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
@@ -31,44 +31,65 @@ const LoginPage = () => {
 
   console.log(lawyerNFTs, courtNFTs);
 
-
   useEffect(() => {
     if (address) {
-      if (!lawyerNFTsLoading && lawyerNFTs && lawyerNFTs[0]?.metadata.name === "Token Access") {
+      if (
+        !lawyerNFTsLoading &&
+        lawyerNFTs &&
+        lawyerNFTs[0]?.metadata.name === "Token Access"
+      ) {
         router.push("/lawyer");
-      } 
-      if (!courtNFTsLoading && courtNFTs && courtNFTs[0]?.metadata.name === "Court") {
+      }
+      if (
+        !courtNFTsLoading &&
+        courtNFTs &&
+        courtNFTs[0]?.metadata.name === "Court"
+      ) {
         router.push("/court");
-      } 
+      }
       if (lawyerNFTs?.length === 0 && courtNFTs?.length === 0) {
         router.push("/auth/mint");
       }
     }
-  }, [router, address, lawyerNFTs, courtNFTs, lawyerNFTsLoading, courtNFTsLoading]);
-
-
+  }, [
+    router,
+    address,
+    lawyerNFTs,
+    courtNFTs,
+    lawyerNFTsLoading,
+    courtNFTsLoading,
+  ]);
 
   return (
-    <div>
-      <h3 className="text-2xl font-bold">Login</h3>
-      {showConnectWallet ? (
-        <ConnectEmbed
-          auth={{
-            loginOptional: false,
-            onLogin() {
-              console.log("Logged in");
-   
-
-            },
-            onLogout() {
-              console.log("Logged out");
-              
-            },
-          }}
+    <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
+      <div className="bg-indigo-500 h-full hidden md:block md:relative  w-full">
+        <Image
+          src="https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          fill
+          className="w-full h-full object-cover"
+          alt="Nyay Setu"
+          unoptimized
         />
-      ) : (
-        <div>Signing in...</div>
-      )}
+      </div>
+      <div className="flex flex-col gap-3 items-center w-full h-full  justify-center">
+        <Image src="/logo/logo.png" alt="Nyay Setu" width={400} height={400} />
+
+        {showConnectWallet ? (
+          <ConnectWallet
+            auth={{
+              loginOptional: false,
+              onLogin() {
+                console.log("Logged in");
+              },
+              onLogout() {
+                console.log("Logged out");
+              },
+            }}
+          />
+        ) : (
+          <LoginLoader />
+        )}
+      </div>
     </div>
   );
 };

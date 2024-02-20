@@ -47,16 +47,16 @@ const courtRoutes = [
     href: "/court/cases",
   },
 
-  // {
-  //   icon: Calendar,
-  //   label: "Meetings",
-  //   href: "/court/meetings",
-  // },
-  // {
-  //   icon: Users,
-  //   label: "My Profile",
-  //   href: "/court/my-profile",
-  // },
+  {
+    icon: Calendar,
+    label: "Meetings",
+    href: "/court/meetings",
+  },
+  {
+    icon: Users,
+    label: "Settings",
+    href: "/court/settings",
+  },
 ];
 
 

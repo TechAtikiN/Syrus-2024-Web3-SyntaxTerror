@@ -59,3 +59,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.page-container {
+  @apply flex flex-col min-h-screen gap-8 p-8
+}
