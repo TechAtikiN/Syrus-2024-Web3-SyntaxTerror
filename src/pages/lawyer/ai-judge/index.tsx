@@ -1,15 +1,14 @@
 import ChatArea from "@/components/ai-judge/ChatArea";
 import ChatInput from "@/components/ai-judge/ChatInput";
 import PDFUpload from "@/components/ai-judge/PDFUpload";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
 import React, { useState } from "react";
 
 const AIJudge = () => {
   const [fileKey, setFileKey] = useState("");
   const [fileName, setFileName] = useState("")
   const [fileUrl, setFileUrl] = useState("")
+  const [prompt, setPrompt] = useState("")
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -22,7 +21,8 @@ const AIJudge = () => {
       body: JSON.stringify({
         file_key: fileKey,
         file_name: fileName,
-        file_url: fileUrl
+        file_url: fileUrl,
+        message: prompt
       })
     })
 
@@ -56,6 +56,7 @@ const AIJudge = () => {
       {/* <ChatArea /> */}
       <form onSubmit={handleSubmit} className='w-full flex justify-center items-center space-x-4'>
         <input
+          onChange={(e) => setPrompt(e.target.value)}
           type="text"
           placeholder="Type your message here"
           className="w-full form-input py-3 text-base"

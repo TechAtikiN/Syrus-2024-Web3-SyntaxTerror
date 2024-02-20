@@ -3,7 +3,6 @@ import { useContract, useNFT } from '@thirdweb-dev/react'
 import Image from 'next/image'
 import ProgressTracker from '@/components/court/caseDetails/ProgressTracker'
 import UpdateCase from '@/components/court/caseDetails/UpdateCase'
-import Link from 'next/link'
 
 const CaseDetailsPage = () => {
   const router = useRouter()

@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.2.1",
+    "@langchain/google-genai": "^0.0.10",
+    "@pinecone-database/doc-splitter": "^0.0.1",
     "@pinecone-database/pinecone": "^2.0.1",
     "@prisma/client": "^5.9.1",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -20,6 +23,7 @@
     "@thirdweb-dev/auth": "^4.1.32",
     "@thirdweb-dev/react": "^4.4.8",
     "@thirdweb-dev/sdk": "^4.0.35",
+    "@types/md5": "^2.3.5",
     "@uploadthing/react": "^6.2.4",
     "@zoom/meetingsdk": "^3.1.6",
     "@zoomus/websdk": "^2.18.3",
@@ -27,8 +31,10 @@
     "clsx": "^2.1.0",
     "embedded": "link:@zoom/meetingsdk/embedded",
     "ethers": "^5.7.2",
+    "genai": "^0.0.18",
     "langchain": "^0.1.20",
     "lucide-react": "^0.334.0",
+    "md5": "^2.3.0",
     "next": "14.1.0",
     "next-themes": "^0.2.1",
     "pdf-parse": "^1.1.1",
