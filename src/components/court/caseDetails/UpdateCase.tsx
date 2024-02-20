@@ -1,7 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useAddress, useContract, useNFT, useSDK } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 
-export default function UpdateCase({ caseDetails }: { caseDetails: any }) {
+type FormValues = {
+  description: string
+  remark: string
+  documents: FileList
+  status: string
+}
+
+export default function UpdateCase({ caseDetails, token }: { caseDetails: any, token: string }) {
+  const router = useRouter()
+
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
+
+  const address = useAddress()
+  const tokenId = caseDetails?.id
+
+  const sdk = useSDK()
+
+  const { contract: FIRCollection } = useContract(process.env.NEXT_PUBLIC_CASES_CONTRACT_ADDRESS)
+
+  const { data: nft, isLoading: isNFTLoading } = useNFT(
+    FIRCollection,
+    tokenId?.toString()
+  )
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -17,7 +43,7 @@ export default function UpdateCase({ caseDetails }: { caseDetails: any }) {
             Make changes to your profile here. Click save when youre done.
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={onSubmit}>
+        <form>
           <div className='grid gap-4 py-4 text-sm'>
             <div className='grid grid-cols-4 items-center gap-4'>
               <label htmlFor='remark'>
@@ -48,7 +74,7 @@ export default function UpdateCase({ caseDetails }: { caseDetails: any }) {
                 className='form-input'
                 {...register('status', { required: true })}
               >
-                {selectedStatus === 'New' && <option value='Pending'>Pending</option>}
+                {/* {selectedStatus === 'New' && <option value='Pending'>Pending</option>} */}
                 <option value='Resolved'>Resolved</option>
               </select>
               {errors.status && <p className='text-red-500 -my-3'>Status is required</p>}

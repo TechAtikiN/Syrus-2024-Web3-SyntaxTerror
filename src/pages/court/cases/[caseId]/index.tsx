@@ -18,7 +18,7 @@ const CaseDetailsPage = () => {
     <div className='page-container'>
       <div className='flex justify-between'>
         <h1 className='heading'><span>Case Details</span></h1>
-        <UpdateCase caseDetails={caseDetails} />
+        <UpdateCase caseDetails={caseDetails} token={token!} />
       </div>
       <div className='grid grid-cols-7 gap-x-5 my-5'>
         <div className='col-span-3'>
