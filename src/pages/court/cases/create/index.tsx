@@ -1,21 +1,34 @@
 import { Button } from '@/components/ui/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid';
+import { useAddress, useContract, useMintNFT } from '@thirdweb-dev/react'
+
+type FormData = {
+  plaintiffName: string
+  plaintiffEmail: string
+  plaintiffContact: string
+  plaintiffAddress: string
+  plaint: FileList
+  defendantName: string
+  defendantEmail: string
+  defendantContact: string
+  defendantAddress: string
+  summon: FileList
+  defendantClaim: FileList
+  additionalDocuments: FileList
+}
 
 const CreateCasePage = () => {
-  type FormData = {
-    plaintiffName: string
-    plaintiffEmail: string
-    plaintiffContact: string
-    plaintiffAddress: string
-    plaint: FileList
-    defendantName: string
-    defendantEmail: string
-    defendantContact: string
-    defendantAddress: string
-    summon: FileList
-    defendantClaim: FileList
-    additionalDocuments: FileList
+  const address = useAddress()
+
+  // const { contract: FIRCollection } = useContract(process.env.NEXT_PUBLIC_FIR_CONTRACT)
+  // const { mutateAsync: mintNft, isSuccess, data: NFTReturnValue } = useMintNFT(FIRCollection)
+
+  function generateRandomId() {
+    return uuidv4(); // Generate a random UUID (Universally Unique Identifier)
   }
+
+
 
   const {
     register,
@@ -23,7 +36,47 @@ const CreateCasePage = () => {
     formState: { errors },
   } = useForm<FormData>()
 
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    const caseId = generateRandomId()
+
+    const caseMetaData = {
+
+    }
+
+    // try {
+    //   toast.loading('Creating FIR')
+    //   await mintNft({
+    //     to: address || '',
+    //     metadata: firMetadata,
+    //   })
+    //   toast.dismiss()
+    //   toast.success('FIR created successfully')
+    //   console.log('NFTReturnValue', NFTReturnValue)
+    //   console.log('isSuccess', isSuccess)
+    //   if (isSuccess) {
+    //     const res = await fetch('/api/mailing', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify({
+    //         ...data,
+    //         // @ts-ignore
+    //         tokenId: NFTReturnValue?.id?._hex.toString(),
+    //         firId: firId,
+    //         status: 'New'
+    //       })
+    //     })
+    //     console.log('res', res)
+    //     if (res.status === 200) {
+    //       toast.success('Mailed FIR to the victim successfully')
+    //     }
+    //   }
+    // } catch (error) {
+    //   alert('Error minting FIR')
+    //   console.log('error', error)
+    // }
+  }
 
   return (
     <div>
