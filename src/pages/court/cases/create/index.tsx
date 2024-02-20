@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid';
 import { useAddress, useContract, useMintNFT } from '@thirdweb-dev/react'
+import { useToast } from '@/components/ui/use-toast';
+import { useState } from 'react';
 
 type FormData = {
   plaintiffName: string
@@ -16,19 +18,20 @@ type FormData = {
   summon: FileList
   defendantClaim: FileList
   additionalDocuments: FileList
+  caseDescription: string
 }
 
 const CreateCasePage = () => {
-  const address = useAddress()
+  const [loading, setLoading] = useState(false)
+  const { toast } = useToast()
 
-  // const { contract: FIRCollection } = useContract(process.env.NEXT_PUBLIC_FIR_CONTRACT)
-  // const { mutateAsync: mintNft, isSuccess, data: NFTReturnValue } = useMintNFT(FIRCollection)
+  const address = useAddress()
+  const { contract: caseCollection } = useContract(process.env.NEXT_PUBLIC_CASES_CONTRACT_ADDRESS)
+  const { mutateAsync: mintNft, isSuccess, data: NFTReturnValue } = useMintNFT(caseCollection)
 
   function generateRandomId() {
     return uuidv4(); // Generate a random UUID (Universally Unique Identifier)
   }
-
-
 
   const {
     register,
@@ -36,51 +39,85 @@ const CreateCasePage = () => {
     formState: { errors },
   } = useForm<FormData>()
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setLoading(true)
     const caseId = generateRandomId()
 
     const caseMetaData = {
-
+      name: `Case for ${data.plaintiffName} vs ${data.defendantName}`,
+      description: 'Creating new case',
+      properties: {
+        plaintiff: {
+          name: data.plaintiffName,
+          email: data.plaintiffEmail,
+          contact: data.plaintiffContact,
+          address: data.plaintiffAddress,
+          plaint: data.plaint,
+        },
+        defendant: {
+          name: data.defendantName,
+          email: data.defendantEmail,
+          contact: data.defendantContact,
+          address: data.defendantAddress,
+          summon: data.summon,
+          claim: data.defendantClaim,
+        },
+        additionalDocuments: data.additionalDocuments,
+        caseDescription: data.caseDescription,
+        status: 'New',
+        caseId: caseId,
+        caseCreatedAt: new Date()
+      },
     }
+    console.log('firMetadata', caseMetaData)
 
-    // try {
-    //   toast.loading('Creating FIR')
-    //   await mintNft({
-    //     to: address || '',
-    //     metadata: firMetadata,
-    //   })
-    //   toast.dismiss()
-    //   toast.success('FIR created successfully')
-    //   console.log('NFTReturnValue', NFTReturnValue)
-    //   console.log('isSuccess', isSuccess)
-    //   if (isSuccess) {
-    //     const res = await fetch('/api/mailing', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify({
-    //         ...data,
-    //         // @ts-ignore
-    //         tokenId: NFTReturnValue?.id?._hex.toString(),
-    //         firId: firId,
-    //         status: 'New'
-    //       })
-    //     })
-    //     console.log('res', res)
-    //     if (res.status === 200) {
-    //       toast.success('Mailed FIR to the victim successfully')
-    //     }
-    //   }
-    // } catch (error) {
-    //   alert('Error minting FIR')
-    //   console.log('error', error)
-    // }
+    try {
+      if (loading) {
+        toast({
+          title: "Submitting...",
+          description: "Please wait while we submit your case",
+        })
+      }
+      await mintNft({
+        to: address || '',
+        metadata: caseMetaData
+      })
+      setLoading(false)
+      toast({
+        title: "Case Created",
+        description: "Your case has been created successfully",
+      })
+      // if (isSuccess) {
+      //   const res = await fetch('/api/mailing', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     },
+      //     body: JSON.stringify({
+      //       ...data,
+      //       // @ts-ignore
+      //       tokenId: NFTReturnValue?.id?._hex.toString(),
+      //       firId: caseId,
+      //       status: 'New'
+      //     })
+      //   })
+      //   console.log('res', res)
+      //   if (res.status === 200) {
+      //     toast({
+      //       title: "Scheduled: Catch up",
+      //       description: "Friday, February 10, 2023 at 5:57 PM",
+      //     })
+      //   }
+      // }
+    } catch (error) {
+      alert('Error minting FIR')
+      console.log('error', error)
+    }
   }
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className='p-3 m-4 rounded-md h-screen' action=''>
+      <form onSubmit={handleSubmit(onSubmit)} className='p-3 m-4 rounded-md' action=''>
         <div className='border-b border-slate-300'>
           <h2 className='text-2xl font-semibold'>Create a Case</h2>
           <p className='font-light pb-2  text-xs'>Please fill the required case details</p>
@@ -181,6 +218,22 @@ const CreateCasePage = () => {
                 {...register('defendantClaim', { required: true })}
                 className='form-input' type='file' />
               {errors.defendantClaim && <span className='text-red-500 text-sm'>This field is required</span>}
+            </div>
+          </div>
+        </div>
+
+        <div className='py-3 font-semibold text-xl'>
+          <h3 className='my-1'>Case Description</h3>
+          <div className='w-full col-span-3'>
+            <div className='flex flex-col space-y-1'>
+              <label className='form-label' htmlFor='caseDescription'>Description about the case</label>
+              <textarea
+                rows={4}
+                {...register('caseDescription', { required: true })}
+                className='form-input'
+              >
+              </textarea>
+              {errors.caseDescription && <span className='text-red-500 text-sm'>This field is required</span>}
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 
+import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/globals/navbar/Navbar";
 import Sidebar from "@/globals/sidebar/Sidebar";
 import { useRouter } from "next/router";
@@ -9,13 +10,14 @@ type Props = {
 const Layout = ({ children }: Props) => {
   const router = useRouter();
   const { pathname } = router;
-  if (pathname.startsWith("/auth" ) || pathname === "/") {
+  if (pathname.startsWith("/auth") || pathname === "/") {
     return (
       <>
-        {children} 
+        {children}
       </>
     );
   }
+
   return (
     <>
       <div className="h-full ">
@@ -26,6 +28,7 @@ const Layout = ({ children }: Props) => {
           <Sidebar />
         </div>
         <main className="md:pl-56 pt-[80px] h-full z-0 ">{children}</main>
+        <Toaster />
       </div>
 
     </>
