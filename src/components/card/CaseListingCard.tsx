@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface Case {
@@ -29,9 +30,13 @@ const getStatusColor = (status: string): string => {
 
 const CaseListingCard = ({ caseItem }: CaseListingCardProps) => {
   const statusColor = getStatusColor(caseItem.status);
+  
 
   return (
-    <div className="group border p-3 rounded-lg ">
+    <Link
+    
+    href={`/court/cases/${caseItem.caseId}`}
+    className="group border p-3 rounded-lg ">
       <div className="flex flex-col gap-2   ">
         <div className="relative overflow-hidden h-56 rounded-lg">
           <Image
@@ -59,7 +64,7 @@ const CaseListingCard = ({ caseItem }: CaseListingCardProps) => {
            {caseItem.date}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
