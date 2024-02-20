@@ -1,3 +1,4 @@
+import CaseListing from "@/components/cases/CaseListing";
 import Heading from "@/components/common/Heading";
 import React from "react";
 
@@ -6,7 +7,7 @@ const CasesPage = () => {
     <div className="page-container">
       <Heading title="Case Listing" />
 
-      
+      <CaseListing />
     </div>
   );
 };
