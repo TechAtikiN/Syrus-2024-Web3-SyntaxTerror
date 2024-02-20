@@ -14,6 +14,7 @@ const model = new GoogleGenerativeAIEmbeddings({
 
 export async function getEmbeddings(text: string) {
   try {
+    text = text.replace(/(?:\r\n|\r|\n)/g, ' ')
     const response = await model.embedQuery(text)
     return response
   } catch (error) {
