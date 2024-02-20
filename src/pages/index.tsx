@@ -1,10 +1,13 @@
-import { UploadButton } from '../utils/uploadThing'
+import { ConnectWallet } from '@thirdweb-dev/react';
+import { Inter } from 'next/font/google'
 
 export default function index() {
 
   return (
-    <div>
-      <h2>hello</h2>
+    <div className=''>
+      Hey Welcome to Nyay Setu
     </div>
   )
 }
+
+
