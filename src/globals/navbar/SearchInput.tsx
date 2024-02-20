@@ -9,7 +9,7 @@ const SearchInput = () => {
       <Search className="h-4 w-4 absolute top-3 left-3 " />
       <Input
         className="w-full md:w-[300px] pl-9 rounded-lg  focus-visible:ring-slate-200"
-        placeholder="Search for a product"
+        placeholder="Search"
       />
     </div>
   );

@@ -74,7 +74,7 @@ const CreateCasePage = () => {
         caseDescription: data.caseDescription,
         status: 'New',
         caseId: caseId,
-        caseCreatedAt: new Date()
+        caseCreatedAt: new Date().toISOString()
       },
     }
     console.log('firMetadata', caseMetaData)

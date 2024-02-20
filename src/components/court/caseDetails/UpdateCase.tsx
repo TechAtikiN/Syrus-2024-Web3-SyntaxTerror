@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 
 type FormValues = {
   description: string
-  remark: string
   documents: FileList
   status: string
 }
@@ -17,7 +16,6 @@ export default function UpdateCase({ caseDetails, token }: { caseDetails: any, t
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
 
   const address = useAddress()
-  const tokenId = caseDetails?.id
 
   const sdk = useSDK()
 
@@ -25,39 +23,94 @@ export default function UpdateCase({ caseDetails, token }: { caseDetails: any, t
 
   const { data: nft, isLoading: isNFTLoading } = useNFT(
     FIRCollection,
-    tokenId?.toString()
+    token?.toString()
   )
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      if (data.status === 'In Progress') {
+        const inProgressCaseMetadata = {
+          name: `Update for ${caseDetails?.plaintiff?.name} vs ${caseDetails?.defendant?.name}`,
+          description: 'Updating Case',
+          properties: {
+            // @ts-ignore
+            ...nft?.metadata?.properties,
+            status: data.status,
+            description: {
+              //@ts-ignore
+              new: nft?.metadata?.properties?.caseDescription,
+              inProgress: data.description,
+            },
+            documents: {
+              //@ts-ignore
+              new: nft?.metadata?.properties?.additionalDocuments,
+              inProgress: data.documents,
+            }
+          }
+        }
+        console.log('inProgressCaseMetadata', inProgressCaseMetadata)
+        const newInProgressURI = await sdk!.storage.upload(inProgressCaseMetadata)
+
+        const updateNFT = await FIRCollection!.call("setTokenURI", [
+          token,
+          newInProgressURI,
+        ])
+      } else if (data.status === 'Resolved') {
+
+        const resolvedCaseMetadata = {
+          name: `Update for ${caseDetails?.plaintiff?.name} vs ${caseDetails?.defendant?.name}`,
+          description: 'Updating Case',
+          properties: {
+            // @ts-ignore
+            ...nft?.metadata?.properties,
+            status: data.status,
+            description: {
+              //@ts-ignore
+              new: nft?.metadata?.properties?.caseDescription,
+              // @ts-ignore
+              inProgress: nft?.metadata?.properties?.description.inProgress,
+              resolved: data.description,
+            },
+            documents: {
+              //@ts-ignore
+              new: nft?.metadata?.properties?.additionalDocuments,
+              // @ts-ignore
+              inProgress: nft?.metadata?.properties?.documents.inProgress,
+              resolved: data.documents,
+            }
+          }
+        }
+        console.log('resolvedCaseMetadata', resolvedCaseMetadata)
+        const newResolvedURI = await sdk!.storage.upload(resolvedCaseMetadata)
+        const updateNFT = await FIRCollection!.call("setTokenURI", [
+          token,
+          newResolvedURI,
+        ])
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  })
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Update Case</Button>
+        <Button className="" variant="outline">Update Case</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[535px]">
         <DialogHeader>
           <DialogTitle>
-            <p className='text-xl text-center'>Update Case</p>
-            <p>{caseDetails?.caseId}</p>
+            <p className='text-2xl text-center text-primary'>Update Case</p>
+            <p className="text-sm text-slate-700 text-center">{caseDetails?.caseId}</p>
           </DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when youre done.
+            Enter relevant details to update the case
           </DialogDescription>
         </DialogHeader>
-        <form>
-          <div className='grid gap-4 py-4 text-sm'>
-            <div className='grid grid-cols-4 items-center gap-4'>
-              <label htmlFor='remark'>
-                Remark
-              </label>
-              <input
-                {...register('remark', { required: true })}
-                id='remark'
-                className='form-input'
-              />
-            </div>
-            {errors.remark && <p className='text-red-500 -my-3'>Remark is required</p>}
-            <div className='grid grid-cols-4 items-center gap-4'>
-              <label htmlFor='documents'>
+        <form onSubmit={onSubmit}>
+          <div className=' text-sm space-y-2'>
+            <div className='flex flex-col space-y-1'>
+              <label className="form-label" htmlFor='documents'>
                 Documents
               </label>
               <input
@@ -68,19 +121,19 @@ export default function UpdateCase({ caseDetails, token }: { caseDetails: any, t
               />
               {errors.documents && <p className='text-red-500 -my-3'>Documents are required</p>}
             </div>
-            <div className='grid grid-cols-4 items-center gap-4'>
-              <label htmlFor=''>Update Status:</label>
+            <div className='flex flex-col space-y-1'>
+              <label className="form-label" htmlFor=''>Update Status:</label>
               <select
                 className='form-input'
                 {...register('status', { required: true })}
               >
-                {/* {selectedStatus === 'New' && <option value='Pending'>Pending</option>} */}
+                {caseDetails?.status === 'New' && <option value='In Progress'>In Progress</option>}
                 <option value='Resolved'>Resolved</option>
               </select>
               {errors.status && <p className='text-red-500 -my-3'>Status is required</p>}
             </div>
-            <div className='grid grid-cols-4 items-center gap-4'>
-              <label htmlFor='description'>
+            <div className='flex flex-col space-y-1'>
+              <label className="form-label" htmlFor='description'>
                 Description
               </label>
               <textarea
@@ -93,7 +146,7 @@ export default function UpdateCase({ caseDetails, token }: { caseDetails: any, t
             </div>
           </div>
           <DialogFooter>
-            <Button type='submit'>Update FIR</Button>
+            <Button className="my-4" type='submit'>Update Case</Button>
           </DialogFooter>
         </form>
       </DialogContent>

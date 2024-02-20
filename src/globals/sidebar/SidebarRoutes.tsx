@@ -54,7 +54,7 @@ const SidebarRoutes = () => {
   const routes = pathname.startsWith("/lawyer") ? lawyerRoutes : pathname.startsWith("/court") ? courtRoutes : [];
 
   return (
-    <div className="flex flex-col w-full gap-2 px-2">
+    <div className="flex flex-col w-full gap-2 px-2 gap-y-4">
       {/* <SidebarItem key="/" icon={LayoutDashboard} label="Dashboard" href="/" /> */}
       {routes.map((route) => (
         <SidebarItem

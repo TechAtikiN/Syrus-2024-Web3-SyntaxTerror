@@ -21,12 +21,12 @@ const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-x-2 text-sm font-[500] pl-6 transition-all rounded-xl  hover:text-white cursor-pointer text-white
+      className={`flex items-center gap-x-2 font-semibold pl-6 hover:text-primary transition-all rounded-xl cursor-pointer mx-1 text-white
       
       ${isActive ? "text-primary font-bold" : ""}`}
       onClick={onClick}
     >
-      <div className="flex items-center gap-x-2 py-4">
+      <div className="flex items-center gap-x-2 py-3">
         <Icon size={22} className={`${isActive ? "text-primary font-bold" : ""}`} />
         <span className={`${isActive ? "text-primary font-bold" : ""}`}> {label}</span>
       </div>
