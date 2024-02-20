@@ -22,7 +22,7 @@ function ProgressTracker({ status }: { status: string }) {
       </li>
 
       {/* {add a horizontal line } */}
-      <li className="h-1 absolute top-16 left-32 w-44 bg-gray-200 dark:bg-gray-700" />
+      <li className="h-1 absolute top-12 left-32 w-44 bg-gray-200 dark:bg-gray-700" />
 
       <li className="mb-10 ms-6 flex flex-col items-center">
         {
@@ -40,7 +40,7 @@ function ProgressTracker({ status }: { status: string }) {
         <p className="text-center text-sm">Step details here</p>
       </li>
 
-      <li className="h-1 absolute top-16 right-28 w-40 bg-gray-200 dark:bg-gray-700" />
+      <li className="h-1 absolute top-12 right-28 w-40 bg-gray-200 dark:bg-gray-700" />
 
       <li className="mb-10 ms-6 flex flex-col items-center">
         {

@@ -1,7 +1,7 @@
 import MeetingCard from "@/components/card/MeetingCard";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 
 export function MeetingsPage({ meetings }: { meetings: Meeting[] }) {
@@ -32,5 +32,6 @@ export const getServerSideProps = (async () => {
   // Fetch data from external API
   const res = await axios.get("http://localhost:3000/api/meetings");
   const meetings = await res.data;
+  console.log(meetings);
   return { props: { meetings } };
 }) satisfies GetServerSideProps<{ meetings: Meeting[] }>;

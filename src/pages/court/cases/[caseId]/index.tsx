@@ -4,6 +4,17 @@ import Image from 'next/image'
 import ProgressTracker from '@/components/court/caseDetails/ProgressTracker'
 import UpdateCase from '@/components/court/caseDetails/UpdateCase'
 import Link from 'next/link'
+import DashboardLoader from '@/components/loader/DashboardLoader'
+
+const Heading = ({ title }: { title: string}) => {
+  return (
+    <div className="flex items-center gap-2 my-3">
+    <div className='bg-primary h-7 w-2 rounded-lg' />
+    <h4 className='text-xl font-bold '>{title}</h4>
+    </div>
+  )
+
+  }
 
 const CaseDetailsPage = () => {
   const router = useRouter()
@@ -14,39 +25,48 @@ const CaseDetailsPage = () => {
   const { data: nft, isLoading, error } = useNFT(caseCollection, token)
   // @ts-ignore
   const caseDetails = nft?.metadata?.properties
-  console.log('caseDetails', caseDetails)
+
+  if(isLoading) return <DashboardLoader />
+
+
   return (
     <div className='page-container'>
-      <div className='flex justify-between'>
+      <div className='flex justify-between '>
         <h1 className='heading'><span>Case Details</span></h1>
         <UpdateCase caseDetails={caseDetails} token={token!} />
       </div>
-      <div className='sm:grid sm:grid-cols-7 gap-x-10 my-5'>
-        <div className='col-span-3'>
-          <div>
-            <div className='relative h-[365px] w-[525px]'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-6 my-5'>
+        <div className='space-y-6'>
+ 
+            <div className='relative h-[400px] w-full rounded-md  '>
               <Image src={'/case.png'} alt='Case Image' fill className='object-cover rounded-lg' />
             </div>
-            <h4 className='text-xl font-bold text-slate-800 mt-5 my-3'>Case Description:</h4>
+            
+            <Heading title='Case Description' />
+         
             {/* @ts-ignore */}
-            <p>{caseDetails?.caseDescription}</p>
+            <p className='text-sm md:text-base text-justify'>{caseDetails?.caseDescription}</p>
             <div className=' mt-5 flex justify-between'>
               {/* @ts-ignore */}
               <p>{caseDetails?.createdAt}</p>
               {/* @ts-ignore */}
               <p>Status:&nbsp;<span className='font-bold'>{caseDetails?.status}</span></p>
             </div>
-          </div>
+        
         </div>
-        <div className='col-span-4'>
+        <div className=''>
           <div className='space-y-4'>
             {/* @ts-ignore */}
             <ProgressTracker status={caseDetails?.status} />
-            <div className='border p-3 rounded-md'>
-              <h4 className='text-xl my-3 font-bold'>Case Details:</h4>
+            <div className='border p-3 rounded-md felx flex-col '>
+              <Heading title='Case Details' />
               <div>
-                <h4 className='text-lg font-semibold underline'>Plaintiff Details</h4>
-                <div className='gap-y-2 grid grid-cols-2 py-2'>
+
+                  
+                <h4 className='text-lg font-semibold underline'> Plaintiff Details</h4>
+      
+             
+                <div className='gap-y-2 grid grid-cols-1 lg:grid-cols-2 py-2'>
                   {/* @ts-ignore */}
                   <p><span className='font-bold'>Name:</span>&nbsp;{caseDetails?.plaintiff?.name}</p>
                   {/* @ts-ignore */}
@@ -64,7 +84,7 @@ const CaseDetailsPage = () => {
 
               <div>
                 <h4 className='text-lg font-semibold underline'>Defendant Details</h4>
-                <div className='gap-y-2 grid grid-cols-2 py-2'>
+                <div className='gap-y-2 grid grid-cols-1 lg:grid-cols-2 py-2'>
                   {/* @ts-ignore */}
                   <p><span className='font-bold'>Name:</span>&nbsp;{caseDetails?.defendant?.name}</p>
                   {/* @ts-ignore */}

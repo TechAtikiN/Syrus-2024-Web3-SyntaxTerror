@@ -1,5 +1,5 @@
 import prisma from "@/lib/prismadb";
-import { Participant } from "@prisma/client";
+
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
