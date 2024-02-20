@@ -1,11 +1,10 @@
-import { Inter } from 'next/font/google'
+import { UploadButton } from '../utils/uploadThing'
 
-const inter = Inter({ subsets: ['latin'] });
+export default function index() {
 
-export default function Home() {
   return (
     <div>
-      heelo world
+      <h2>hello</h2>
     </div>
-  );
+  )
 }
