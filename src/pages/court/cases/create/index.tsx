@@ -10,11 +10,15 @@ type FormData = {
   plaintiffEmail: string
   plaintiffContact: string
   plaintiffAddress: string
+  plaintiffLawyerName: string
+  plaintiffLawyerEmail: string
   plaint: FileList
   defendantName: string
   defendantEmail: string
   defendantContact: string
   defendantAddress: string
+  defendantLawyerName: string
+  defendantLawyerEmail: string
   summon: FileList
   defendantClaim: FileList
   additionalDocuments: FileList
@@ -53,6 +57,8 @@ const CreateCasePage = () => {
           contact: data.plaintiffContact,
           address: data.plaintiffAddress,
           plaint: data.plaint,
+          lawyerName: data.plaintiffLawyerName,
+          lawyerEmail: data.plaintiffLawyerEmail
         },
         defendant: {
           name: data.defendantName,
@@ -61,6 +67,8 @@ const CreateCasePage = () => {
           address: data.defendantAddress,
           summon: data.summon,
           claim: data.defendantClaim,
+          lawyerName: data.defendantLawyerName,
+          lawyerEmail: data.defendantLawyerEmail
         },
         additionalDocuments: data.additionalDocuments,
         caseDescription: data.caseDescription,
@@ -159,6 +167,22 @@ const CreateCasePage = () => {
             </div>
 
             <div className='flex flex-col space-y-1'>
+              <label className='form-label' htmlFor='plaintiffLawyerName'>Lawyer Name:</label>
+              <input
+                {...register('plaintiffLawyerName', { required: true })}
+                className='form-input' type='text' />
+              {errors.plaintiffLawyerName && <span className='text-red-500 text-sm'>This field is required</span>}
+            </div>
+
+            <div className='flex flex-col space-y-1'>
+              <label className='form-label' htmlFor='plaintiffLawyerEmail'>Lawyer Email:</label>
+              <input
+                {...register('plaintiffLawyerEmail', { required: true })}
+                className='form-input' type='text' />
+              {errors.plaintiffLawyerEmail && <span className='text-red-500 text-sm'>This field is required</span>}
+            </div>
+
+            <div className='flex flex-col space-y-1'>
               <label className='form-label' htmlFor='plaint'>Plaint</label>
               <input
                 {...register('plaint', { required: true })}
@@ -201,7 +225,22 @@ const CreateCasePage = () => {
                 {...register('defendantAddress', { required: true })}
                 className='form-input' type='text' />
               {errors.defendantAddress && <span className='text-red-500 text-sm'>This field is required</span>}
+            </div>
 
+            <div className='flex flex-col space-y-1'>
+              <label className='form-label' htmlFor='defendantLawyerName'>Lawyer Name:</label>
+              <input
+                {...register('defendantLawyerName', { required: true })}
+                className='form-input' type='text' />
+              {errors.defendantLawyerName && <span className='text-red-500 text-sm'>This field is required</span>}
+            </div>
+
+            <div className='flex flex-col space-y-1'>
+              <label className='form-label' htmlFor='defendantLawyerEmail'>Lawyer Email:</label>
+              <input
+                {...register('defendantLawyerEmail', { required: true })}
+                className='form-input' type='text' />
+              {errors.defendantLawyerEmail && <span className='text-red-500 text-sm'>This field is required</span>}
             </div>
 
             <div className='flex flex-col space-y-1'>

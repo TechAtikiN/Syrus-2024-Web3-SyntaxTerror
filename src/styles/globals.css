@@ -70,6 +70,10 @@
   }
 
   .page-container {
-    @apply flex flex-col min-h-screen gap-8 p-8
+    @apply flex flex-col min-h-screen gap-8 p-3
+  }
+
+  .heading {
+    @apply text-2xl font-semibold 
   }
 }

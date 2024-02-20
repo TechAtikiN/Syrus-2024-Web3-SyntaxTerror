@@ -1,11 +1,10 @@
-import CaseListing from "@/components/cases/CaseListing";
-import Heading from "@/components/common/Heading";
-import React from "react";
+import CaseListing from '@/components/cases/CaseListing'
+import React from 'react';
 
 const CasesPage = () => {
   return (
-    <div className="page-container">
-      <Heading title="Case Listing" />
+    <div className='page-container'>
+      <h1 className='heading'>Case Listing</h1>
 
       <CaseListing />
     </div>
