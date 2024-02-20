@@ -1,13 +1,11 @@
-import React from "react";
+import { useRouter } from "next/router";
 import {
   FileText,
   MessageSquareText,
-  Calendar,
   Users,
   LayoutDashboard,
 } from "lucide-react";
 import SidebarItem from "./SidebarItem";
-import { useRouter } from "next/router";
 
 const lawyerRoutes = [
   {
@@ -26,37 +24,19 @@ const lawyerRoutes = [
     label: "AI Judge",
     href: "/lawyer/ai-judge",
   },
-
-
-  // {
-  //   icon: Calendar,
-  //   label: "Meetings",
-  //   href: "/lawyer/meetings",
-  // },
-  // {
-  //   icon: Users,
-  //   label: "My Profile",
-  //   href: "/lawyer/my-profile",
-  // },
 ];
 
 const courtRoutes = [
   {
-    icon: FileText,
+    icon: LayoutDashboard,
     label: "Cases",
     href: "/court/cases",
   },
-
-  // {
-  //   icon: Calendar,
-  //   label: "Meetings",
-  //   href: "/court/meetings",
-  // },
-  // {
-  //   icon: Users,
-  //   label: "My Profile",
-  //   href: "/court/my-profile",
-  // },
+  {
+    icon: FileText,
+    label: "Create Case",
+    href: "/court/cases/create",
+  }
 ];
 
 
