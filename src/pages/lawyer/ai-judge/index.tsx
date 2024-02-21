@@ -15,6 +15,7 @@ const AIJudge = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setMessages([...messages, { sender: 'user', message: prompt }])
+    console.log(messages)
     e.preventDefault()
     const response = await fetch('/api/ai-judge', {
       method: 'POST',
@@ -31,6 +32,7 @@ const AIJudge = () => {
 
     const data = await response.json()
     setMessages([...messages, { sender: 'AI', message: data.name }])
+    console.log(messages)
   }
 
   return (

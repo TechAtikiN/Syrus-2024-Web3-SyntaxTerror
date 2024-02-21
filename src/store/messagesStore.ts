@@ -21,8 +21,7 @@ export const useMessagesStore = create<MessageStore>()(
             message: 'Hello, I am AI Judge. How can I help you today?',
           },
         ],
-        // push new messgae to the messages array
-        setMessages: (messages) => set({ messages }),
+        setMessages: (messages) => set((state) => ({ ...state, messages })),
       }),
       {
         name: 'messages',
