@@ -9,7 +9,7 @@ type Data = {
 };
 
 const model = new ChatGoogleGenerativeAI({
-  apiKey: "AIzaSyBOt6J7Tyg8kuo8zYwtKFw455MLCmHoVXI",
+  apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY!,
   temperature: 0.7,
   modelName: "gemini-pro",
   topK: 40,

@@ -4,8 +4,8 @@ import { createTransport } from "nodemailer";
 const transporter = createTransport({
     service: "gmail",
   auth: {
-      user: "patiljanhavi69@gmail.com",
-      pass: "avlr wpvo ecgp basa",
+      user: "process.env.NEXT_PUBLIC_USERNAME",
+      pass: "process.env.NEXT_PUBLIC_PASSWORD",
     },
 });
 

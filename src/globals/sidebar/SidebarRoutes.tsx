@@ -11,8 +11,8 @@ import SidebarItem from "./SidebarItem";
 const lawyerRoutes = [
   {
     icon: FileText,
-    label: "AI Summarizer",
-    href: "/lawyer/ai-summarizer",
+    label: "AI Judge",
+    href: "/lawyer/ai-judge",
   },
   {
     icon: MessageSquareText,
