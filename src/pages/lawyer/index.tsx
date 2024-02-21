@@ -22,7 +22,7 @@ const LawyerPage = () => {
   )
 
   return (
-    <div className='flex flex-col gap-4 min-h-screen space-y-3'>
+    <div className='page-container'>
       <h1 className='heading'>Lawyer Dashboard</h1>
       {/* <h3 className='text-2xl font-bold'>You have access!</h3> */}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-3'>
