@@ -36,8 +36,8 @@ function ProgressTracker({ status }: { status: string }) {
             </span>
           )
         }
-        <h3 className="font-bold text-lg leading-tight text-center">Account Info</h3>
-        <p className="text-center text-sm">Step details here</p>
+        <h3 className="font-bold text-lg leading-tight text-center">In Progress</h3>
+        <p className="text-center text-sm">Case is in active state</p>
       </li>
 
       <li className="h-1 absolute top-12 right-28 w-40 bg-gray-200 dark:bg-gray-700" />
@@ -54,8 +54,8 @@ function ProgressTracker({ status }: { status: string }) {
             </span>
           )
         }
-        <h3 className="font-bold text-lg leading-tight text-center">Review</h3>
-        <p className="text-center text-sm">Step details here</p>
+        <h3 className="font-bold text-lg leading-tight text-center">Resolved</h3>
+        <p className="text-center text-sm">Resolved the case</p>
       </li>
     </ol>
   );

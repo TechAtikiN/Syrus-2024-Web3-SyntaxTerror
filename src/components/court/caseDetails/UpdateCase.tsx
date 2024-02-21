@@ -55,6 +55,7 @@ export default function UpdateCase({ caseDetails, token }: { caseDetails: any, t
           token,
           newInProgressURI,
         ])
+        router.reload()
       } else if (data.status === 'Resolved') {
 
         const resolvedCaseMetadata = {
@@ -86,6 +87,7 @@ export default function UpdateCase({ caseDetails, token }: { caseDetails: any, t
           token,
           newResolvedURI,
         ])
+        router.reload()
       }
     } catch (error) {
       console.log(error)
