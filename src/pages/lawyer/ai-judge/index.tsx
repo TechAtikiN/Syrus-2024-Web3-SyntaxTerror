@@ -2,8 +2,13 @@ import ChatArea from "@/components/ai-judge/ChatArea";
 import ChatInput from "@/components/ai-judge/ChatInput";
 import PDFUpload from "@/components/ai-judge/PDFUpload";
 import { Button } from "@/components/ui/button"
+import { useChatStore } from "@/store/message";
 import { useMessagesStore } from "@/store/messagesStore";
 import React, { useState } from "react";
+type Message = {
+  sender: string
+  message: any
+}
 
 const AIJudge = () => {
   const [fileKey, setFileKey] = useState("");
@@ -14,8 +19,16 @@ const AIJudge = () => {
   const [messages, setMessages] = useMessagesStore((state) => [state.messages, state.setMessages])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setMessages([...messages, { sender: 'user', message: prompt }])
-    console.log(messages)
+    // useMessagesStore.getState().setMessages([...messages, { sender: 'user', message: prompt }])
+    // console.log(messages)
+    useChatStore.setState((state) => ({
+      message: [
+        ...state.message,
+        { ...state.message, sender: 'user', message: prompt},
+      ],
+    }));
+
+
     e.preventDefault()
     const response = await fetch('/api/ai-judge', {
       method: 'POST',
@@ -31,7 +44,12 @@ const AIJudge = () => {
     })
 
     const data = await response.json()
-    setMessages([...messages, { sender: 'AI', message: data.name }])
+    useChatStore.setState((state) => ({
+      message: [
+        ...state.message,
+        { ...state.message, sender: 'AI', message: data.name},
+      ],
+    }));
     console.log(messages)
   }
 
