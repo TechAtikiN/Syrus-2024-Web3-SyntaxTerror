@@ -16,7 +16,7 @@ const getStatusColor = (status: string): string => {
     case 'New':
       return 'bg-purple-300 text-purple-600 dark:text-purple-600  border-purple-500'
     default:
-      return 'bg-gray-500 '
+      return 'bg-gray-700 '
   }
 }
 
@@ -40,10 +40,10 @@ const CaseListingCard = ({ caseItem, tokenId }: CaseListingCardProps) => {
         <h3 className='text-lg font-semibold text-primary'>
           {caseItem?.plaintiff.name} Vs {caseItem?.defendant.name}
         </h3>
-        <p className='text-sm text-gray-400'>
+        <p className='text-sm text-gray-700'>
           <span className='font-semibold'>Case ID</span> {caseItem?.caseId}
         </p>
-        <p className='text-sm text-gray-400'>
+        <p className='text-sm text-gray-700'>
           <span
             className={`inline-block px-3 text-xs font-semibold py-1 border rounded-full ${getStatusColor(caseItem?.status)}`}
           >
@@ -51,7 +51,10 @@ const CaseListingCard = ({ caseItem, tokenId }: CaseListingCardProps) => {
           </span>
         </p>
 
-        <p className='text-sm text-gray-400'>{caseItem?.caseCreatedAt}</p>
+        <p className='text-sm text-gray-700'>{
+          //format date
+          new Date(caseItem?.caseCreatedAt).toDateString()
+        }</p>
       </div>
     </Link>
   )

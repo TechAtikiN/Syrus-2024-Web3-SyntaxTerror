@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useAddress, useContract, useMintNFT } from '@thirdweb-dev/react'
 import { useToast } from '@/components/ui/use-toast';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 type FormData = {
   plaintiffName: string
@@ -12,6 +13,7 @@ type FormData = {
   plaintiffAddress: string
   plaintiffLawyerName: string
   plaintiffLawyerEmail: string
+  plaintiffLawyerWalletAddress: string
   plaint: FileList
   defendantName: string
   defendantEmail: string
@@ -19,6 +21,7 @@ type FormData = {
   defendantAddress: string
   defendantLawyerName: string
   defendantLawyerEmail: string
+  defendantLawyerWalletAddress: string
   summon: FileList
   defendantClaim: FileList
   additionalDocuments: FileList
@@ -26,6 +29,7 @@ type FormData = {
 }
 
 const CreateCasePage = () => {
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
 
@@ -58,7 +62,8 @@ const CreateCasePage = () => {
           address: data.plaintiffAddress,
           plaint: data.plaint,
           lawyerName: data.plaintiffLawyerName,
-          lawyerEmail: data.plaintiffLawyerEmail
+          lawyerEmail: data.plaintiffLawyerEmail,
+          lawyerWalletAddress: data.plaintiffLawyerWalletAddress
         },
         defendant: {
           name: data.defendantName,
@@ -68,7 +73,8 @@ const CreateCasePage = () => {
           summon: data.summon,
           claim: data.defendantClaim,
           lawyerName: data.defendantLawyerName,
-          lawyerEmail: data.defendantLawyerEmail
+          lawyerEmail: data.defendantLawyerEmail,
+          lawyerWalletAddress: data.defendantLawyerWalletAddress
         },
         additionalDocuments: data.additionalDocuments,
         caseDescription: data.caseDescription,
@@ -91,6 +97,7 @@ const CreateCasePage = () => {
         metadata: caseMetaData
       })
       setLoading(false)
+      router.push('/court/cases')
       toast({
         title: "Case Created",
         description: "Your case has been created successfully",
@@ -183,6 +190,14 @@ const CreateCasePage = () => {
             </div>
 
             <div className='flex flex-col space-y-1'>
+              <label className='form-label' htmlFor='plaintiffLawyerWalletAddress'>Lawyer Wallet Address:</label>
+              <input
+                {...register('plaintiffLawyerWalletAddress', { required: true })}
+                className='form-input' type='text' />
+              {errors.plaintiffLawyerWalletAddress && <span className='text-red-500 text-sm'>This field is required</span>}
+            </div>
+
+            <div className='flex flex-col space-y-1'>
               <label className='form-label' htmlFor='plaint'>Plaint</label>
               <input
                 {...register('plaint', { required: true })}
@@ -241,6 +256,14 @@ const CreateCasePage = () => {
                 {...register('defendantLawyerEmail', { required: true })}
                 className='form-input' type='text' />
               {errors.defendantLawyerEmail && <span className='text-red-500 text-sm'>This field is required</span>}
+            </div>
+
+            <div className='flex flex-col space-y-1'>
+              <label className='form-label' htmlFor='defendantLawyerWalletAddress'>Lawyer Wallet Address:</label>
+              <input
+                {...register('defendantLawyerWalletAddress', { required: true })}
+                className='form-input' type='text' />
+              {errors.defendantLawyerWalletAddress && <span className='text-red-500 text-sm'>This field is required</span>}
             </div>
 
             <div className='flex flex-col space-y-1'>

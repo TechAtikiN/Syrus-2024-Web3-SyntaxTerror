@@ -13,7 +13,6 @@ const Heading = ({ title }: { title: string }) => {
       <h4 className='text-xl font-bold '>{title}</h4>
     </div>
   )
-
 }
 
 const CaseDetailsPage = () => {
@@ -25,7 +24,7 @@ const CaseDetailsPage = () => {
   const { data: nft, isLoading, error } = useNFT(caseCollection, token)
   // @ts-ignore
   const caseDetails = nft?.metadata?.properties
-
+  console.log(caseDetails)
   if (isLoading) return <DashboardLoader />
 
 
@@ -48,7 +47,7 @@ const CaseDetailsPage = () => {
           <p className='text-sm md:text-base text-justify'>{caseDetails?.caseDescription}</p>
           <div className=' mt-5 flex justify-between'>
             {/* @ts-ignore */}
-            <p>{caseDetails?.createdAt}</p>
+            <p>Created At: <span className='font-bold'>{new Date(caseDetails?.caseCreatedAt).toDateString()}</span></p>
             {/* @ts-ignore */}
             <p>Status:&nbsp;<span className='font-bold'>{caseDetails?.status}</span></p>
           </div>
@@ -103,7 +102,28 @@ const CaseDetailsPage = () => {
 
               <div>
                 <h4 className='text-lg font-semibold underline'>Documents</h4>
-                <div className='gap-y-2 grid grid-cols-2 py-2'>
+
+                <div className='gap-y-2 grid grid-cols-1 lg:grid-cols-2 py-2'>
+                  <div className='flex space-x-1'>
+                    <p className='font-bold'>Plaintiff:</p>
+                    {/* @ts-ignore */}
+                    <Link className='text-primary font-semibold underline' href={`${caseDetails?.plaintiff?.plaint[0]}`}>View Document</Link>
+                  </div>
+                  <div className='flex space-x-1'>
+                    <p className='font-bold'>Claim:</p>
+                    {/* @ts-ignore */}
+                    <Link className='text-primary font-semibold underline' href={`${caseDetails?.defendant?.claim[0]}`}>View Document</Link>
+                  </div>
+                  <div className='flex space-x-1'>
+                    <p className='font-bold'>Summon:</p>
+                    {/* @ts-ignore */}
+                    <Link className='text-primary font-semibold underline' href={`${caseDetails?.defendant?.summon[0]}`}>View Document</Link>
+                  </div>
+                  <div className='flex space-x-1'>
+                    <p className='font-bold'>Documents:</p>
+                    {/* @ts-ignore */}
+                    <Link className='text-primary font-semibold underline' href={`${caseDetails?.additionalDocuments}`}>View Document</Link>
+                  </div>
 
                 </div>
               </div>

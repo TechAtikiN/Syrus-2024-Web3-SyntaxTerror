@@ -15,20 +15,14 @@ const lawyerRoutes = [
     href: "/lawyer/ai-summarizer",
   },
   {
-    icon: Users,
-    label: "View Cases",
-    href: "/lawyer/cases",
-  },
-
-  {
-    icon: MessageSquareText,
-    label: "AI Judge",
-    href: "/lawyer/ai-judge",
-  },
-  {
     icon: MessageSquareText,
     label: "Scheduled Meetings",
     href: "/lawyer/meetings",
+  },
+  {
+    icon: Users,
+    label: "Settings",
+    href: "/court/settings",
   },
 ];
 
