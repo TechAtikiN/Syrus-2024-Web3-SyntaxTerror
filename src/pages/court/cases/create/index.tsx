@@ -35,7 +35,7 @@ const CreateCasePage = () => {
 
   const address = useAddress()
   const { contract: caseCollection } = useContract(process.env.NEXT_PUBLIC_CASES_CONTRACT_ADDRESS)
-  const { mutateAsync: mintNft, isSuccess, data: NFTReturnValue } = useMintNFT(caseCollection)
+  const { mutateAsync: mintNft, isSuccess, failureReason, data: NFTReturnValue } = useMintNFT(caseCollection)
 
   function generateRandomId() {
     return uuidv4(); // Generate a random UUID (Universally Unique Identifier)
@@ -46,6 +46,11 @@ const CreateCasePage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>()
+
+  console.log(isSuccess, failureReason, NFTReturnValue)
+  if (isSuccess) {
+    console.log('NFTReturnValue', NFTReturnValue)
+  }
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setLoading(true)
@@ -83,7 +88,6 @@ const CreateCasePage = () => {
         caseCreatedAt: new Date().toISOString()
       },
     }
-    console.log('firMetadata', caseMetaData)
 
     try {
       if (loading) {
@@ -102,6 +106,24 @@ const CreateCasePage = () => {
         title: "Case Created",
         description: "Your case has been created successfully",
       })
+
+      if (isSuccess) {
+        console.log('NFTReturnValue', data)
+        const res = await fetch('/api/mailing', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            // @ts-ignore
+            email: data.plaintiffEmail,
+            // @ts-ignore
+            tokenId: NFTReturnValue?.id?._hex,
+          })
+        })
+        console.log('res', res)
+      }
+
       // if (isSuccess) {
       //   const res = await fetch('/api/mailing', {
       //     method: 'POST',
@@ -125,7 +147,7 @@ const CreateCasePage = () => {
       //   }
       // }
     } catch (error) {
-      alert('Error minting FIR')
+      alert('Error minting Case')
       console.log('error', error)
     }
   }

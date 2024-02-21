@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 interface CaseListingCardProps {
@@ -21,9 +22,13 @@ const getStatusColor = (status: string): string => {
 }
 
 const CaseListingCard = ({ caseItem, tokenId }: CaseListingCardProps) => {
+  const router = useRouter()
+  const pathname = router.pathname.split('/')[1]
+  const role = pathname.startsWith('court') ? 'court' : 'lawyer'
+
   return (
     <Link
-      href={`/court/cases/${`${tokenId}-${caseItem?.caseId}`}`}
+      href={`/court/cases/${`${tokenId}-${caseItem?.caseId}?role=${role}`}`}
       className='group border p-3 rounded-lg '
     >
       <div className='flex flex-col gap-2 justify-between h-full  '>

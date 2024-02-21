@@ -17,7 +17,7 @@ const Heading = ({ title }: { title: string }) => {
 
 const CaseDetailsPage = () => {
   const router = useRouter()
-  const { caseId } = router.query
+  const { caseId, role } = router.query
   const token = caseId?.toString().split('-')[0]
 
   const { contract: caseCollection } = useContract(process.env.NEXT_PUBLIC_CASES_CONTRACT_ADDRESS)
@@ -27,12 +27,13 @@ const CaseDetailsPage = () => {
   console.log(caseDetails)
   if (isLoading) return <DashboardLoader />
 
-
   return (
     <div className='page-container'>
       <div className='flex justify-between '>
         <h1 className='heading'><span>Case Details</span></h1>
-        <UpdateCase caseDetails={caseDetails} token={token!} />
+        {
+          role === 'court' && <UpdateCase caseDetails={caseDetails} token={token!} />
+        }
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-6 my-5'>
         <div className='space-y-6'>

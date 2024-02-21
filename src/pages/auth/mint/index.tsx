@@ -42,7 +42,7 @@ const MintPage = () => {
             action={(contract) => contract.erc1155.claim(0, 1)}
             onSuccess={() => router.push("/lawyer")}
           >
-            Mint Lawyer NFT
+            Claim Lawyer NFT
           </Web3Button>
         ) : option === "court" ? (
           <Web3Button
@@ -50,7 +50,7 @@ const MintPage = () => {
             action={(contract) => contract.erc1155.claim(1, 1)}
             onSuccess={() => router.push("/court")}
           >
-            Mint Court NFT
+            Claim Court NFT
           </Web3Button>
         ) : null}
       </div>
