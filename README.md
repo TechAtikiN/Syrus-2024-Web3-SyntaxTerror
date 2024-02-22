@@ -1,40 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NyaySetu 
 
-## Getting Started
+**NyaySetu** is a modern web application that empowers stakeholders across the **Legal System**. It is a **full-stack** solution that streamlines the management of **cases**, **documents**, and communication, enhancing **efficiency** and **transparency**.
 
-First, run the development server:
+## Key Features📋
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+> The objective is to create a faster, fairer, and more accessible legal system 
+### For Court Staff
+- [x] The court staff can create a new case and add required details
+- [x] The case is stored as NFT in the Blockchain, this ensures transparency of the case
+- [x] As the case proceeds the staff can update the details by making a transaction ensuring the transparency of the case
+- [x] The court staff can connect with lawyers, plaintiff or defendants by scheduling a meeting
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### For Lawyers
+- [x] Lawyers can view the cases they are involved in
+- [x] With the help of AI, the lawyer can efficiently analyse the case and case details.
+- [x] The lawyer can seamlessly experience a mock trial by providing the AI judge with the case details
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### For Plaintiffs and Defendants
+- [x] Plaintiffs and Defendants can scan a QR code to view the case details and the status of the case
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Tools and Technologies 🚀
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Framework: Next.js (React.js)
+- Language: Typescript
+- Thirdweb SDK
+- Styling: Tailwind CSS + Shadcn UI
+- State Management: Zustand
+- AI Integration: Gemini AI 
+- Blockchain: Ethereum
+- Deployment: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Find Important Links  📚
+- [Summary](https://www.canva.com/design/DAF9TC0_tR4/cMkMvFP290O4CaKvgmgibg/view) 
+- [Frontend README](./docs/FRONTEND.md)
 
-## Learn More
+## Best Practices
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [x]  Type-safe code
+- [x]  Clean and readable code
+- [x]  Conventional Commits specification for commit messages

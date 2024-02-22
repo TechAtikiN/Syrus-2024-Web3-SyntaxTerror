@@ -57,7 +57,7 @@ const Features = () => {
               ⭐ Enhanced Security
             </h1>
             <p className="text-[#00252e] text-center w-full  font-normal text-md grow-together-line-height pb-6 mt-10 md:text-lg md:leading-6 lg:text-left lg:px-3  lg:w-full ">
-              With blockchain&apos;s cryptographic techniques, sensitive data in FIRs
+              With blockchain&apos;s cryptographic techniques, sensitive data in cases
               is safeguarded against unauthorized access, reducing the risk of
               data breaches and maintaining the privacy of individuals involved.
               🛡️
@@ -89,7 +89,7 @@ const Features = () => {
             </h1>
             <p className="text-[#00252e] text-center w-full  font-normal text-md grow-together-line-height pb-6 mt-10 md:text-lg md:leading-6 lg:text-left lg:px-3  lg:w-full ">
               Our user-friendly interface simplifies the process of creating and
-              submitting FIRs, reducing administrative burdens on law
+              submitting cases, reducing administrative burdens on law
               enforcement agencies and making it easier for citizens to report
               incidents. 🖥️🤖
             </p>
@@ -120,7 +120,7 @@ const Features = () => {
             <p className="text-[#00252e] text-center w-full  font-normal text-md grow-together-line-height pb-6 mt-10 md:text-lg md:leading-6 lg:text-left lg:px-3  lg:w-full ">
               The decentralized nature of blockchain ensures that all
               stakeholders, from law enforcement agencies to the public, can
-              access FIRs transparently. This fosters trust and accountability
+              access cases transparently. This fosters trust and accountability
               in the reporting process. 👁️🤝
             </p>
           </div>
