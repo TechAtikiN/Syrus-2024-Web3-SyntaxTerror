@@ -31,6 +31,7 @@
 - Deployment: Vercel
 
 ## Find Important Links  📚
+- [Youtube Video](https://www.youtube.com/watch?v=U_WQjPNW-HQ)
 - [Summary](https://www.canva.com/design/DAF9TC0_tR4/cMkMvFP290O4CaKvgmgibg/view) 
 - [Frontend README](./docs/FRONTEND.md)
 
